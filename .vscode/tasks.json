@@ -1,0 +1,77 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build debug",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "PLATFORM=PLATFORM_DESKTOP",
+                "BUILD_MODE=DEBUG",
+            ],
+            "windows": {
+                "command": "mingw32-make.exe",
+                "args": [
+                    "RAYLIB_PATH=C:/raylib/raylib",
+                    "BUILD_MODE=DEBUG"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "RAYLIB_PATH=<path_to_raylib>/raylib",
+                    "BUILD_MODE=DEBUG"
+                ]
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "build release",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "PLATFORM=PLATFORM_DESKTOP",
+            ],
+            "windows": {
+                "command": "mingw32-make.exe",
+                "args": [
+                    "RAYLIB_PATH=C:/raylib/raylib",
+                ]
+            },
+            "osx": {
+                "args": [
+                    "RAYLIB_PATH=<path_to_raylib>/raylib",
+                ]
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe Aktive Datei kompilieren",
+            "command": "C:/raylib/w64devkit/bin/gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\SandSimulation.exe"
+            ],
+            "options": {
+                "cwd": "C:/raylib/w64devkit/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Vom Debugger generierte Aufgabe."
+        }
+    ]
+}
