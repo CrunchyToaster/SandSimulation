@@ -7,26 +7,23 @@ const int width = 700/10;
 const int height = 700/10;
 int grid[width][height];
 void updateFalling() {
-    for(int i = width; i > 0; i--){
-        for(int j = height; j > 0; j--){
+    for(int i = width-1; i > 0; i--){
+        for(int j = height-1; j > 0; j--){
             int state = grid[i][j];
             if(state == 1){
                 if(j < height - 1 && grid[i][j+1] != 1){
                     grid[i][j+1] = 1;
                     grid[i][j] = 0;
-                    break;
                 }
                 else if(grid[i][j+1] == 1 && grid[i+1][j+1] == 0)
                 {
                     grid[i+1][j+1] = 1;
                     grid[i][j] = 0;
-                    break;
                 }
                 else if(grid[i][j+1] == 1 && grid[i-1][j+1] == 0)
                 {
                     grid[i-1][j+1] = 1;
                     grid[i][j] = 0;
-                    break;
                 }
             }
             
@@ -62,7 +59,7 @@ void UpdateDrawFrame()
     if(IsMouseButtonDown( MOUSE_BUTTON_LEFT)) {
         unsigned int i = (int)std::floor(GetMousePosition().x / 10);
         unsigned int j = (int)std::floor(GetMousePosition().y / 10);
-        if(!(i > 700 || j > 700))
+        if(i < width && j < height)
         {
             grid[i][j] = 1;
         }
