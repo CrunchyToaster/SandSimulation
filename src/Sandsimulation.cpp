@@ -20,34 +20,33 @@ Color colors[] = {
 int currentColor = 0;
 
 void updateFalling() {
-    for(int i = width-1; i > 0; i--){
-        for(int j = height-2; j > 0; j--){
+    // Corrected loop to start from width - 1 and height - 2 without skipping the first row and column
+    for(int i = 0; i < width; i++){ // Loop through all columns
+        for(int j = height - 2; j >= 0; j--){ // Start from the second-to-last row and move upwards
             if(grid[i][j].hasBlock){
-                // Check if the block can move down
+                // Downward movement
                 if(j < height - 1 && !grid[i][j+1].hasBlock){
-                    // Move the block down
                     grid[i][j+1].hasBlock = true;
                     grid[i][j+1].color = grid[i][j].color;
                     grid[i][j].hasBlock = false;
-                    // No need to reset color for the empty cell, but you can if you want to maintain a clean state
                 }
-                else if(j < height - 1 && grid[i][j+1].hasBlock && i < width - 1 && !grid[i+1][j+1].hasBlock){
-                    // Move the block down-right if possible
+                // Down-right movement
+                else if(i < width - 1 && j < height - 1 && grid[i][j+1].hasBlock && !grid[i+1][j+1].hasBlock){
                     grid[i+1][j+1].hasBlock = true;
                     grid[i+1][j+1].color = grid[i][j].color;
                     grid[i][j].hasBlock = false;
                 }
-                else if(j < height - 1 && grid[i][j+1].hasBlock && i > 0 && !grid[i-1][j+1].hasBlock){
-                    // Move the block down-left if possible
+                // Down-left movement
+                else if(i > 0 && j < height - 1 && grid[i][j+1].hasBlock && !grid[i-1][j+1].hasBlock){
                     grid[i-1][j+1].hasBlock = true;
                     grid[i-1][j+1].color = grid[i][j].color;
                     grid[i][j].hasBlock = false;
                 }
             }
-            
         }
     }
 }
+
 
 void UpdateDrawFrame();
 
